@@ -3,8 +3,7 @@ package com.mczeno.framework.ssm.configuration;
 import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * 项目初始化配置
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Chongming Zhou
  * @date 2018-06-29
  */
+@Configuration
 @ComponentScan(value = "com.mczeno.framework.ssm",
-        excludeFilters = {@Filter(type = FilterType.ANNOTATION, classes = {Controller.class, RestController.class})})
+        excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = {EnableWebMvc.class})})
 @PropertySource("classpath:/application.properties")
 public class WebApplicationRootConfig {
 

@@ -47,11 +47,11 @@
 		    <scope>test</scope>
 		</dependency>
 		<!-- thymeleaf-spring4 -->
-		<!-- <dependency>
+		<dependency>
 		    <groupId>org.thymeleaf</groupId>
 		    <artifactId>thymeleaf-spring4</artifactId>
 		    <version>${thymeleaf-spring4.version}</version>
-		</dependency> -->
+		</dependency>
 		<!-- Mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>

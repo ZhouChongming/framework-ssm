@@ -1,12 +1,16 @@
 package com.mczeno.framework.ssm.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.DefaultTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 /**
  * mvc 配置
@@ -14,6 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * @author Chongming Zhou
  * @date 2018-06-29
  */
+@Configuration
 @EnableWebMvc
 @ComponentScan(value = "com.mczeno.framework.ssm.controller")
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -34,10 +39,33 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/pages/");
-		viewResolver.setSuffix(".jsp");
+//		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//		viewResolver.setPrefix("/pages/");
+//		viewResolver.setSuffix(".jsp");
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
 		registry.viewResolver(viewResolver);
 	}
-	
+
+	@Bean
+    public TemplateEngine templateEngine() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        return templateEngine;
+    }
+
+    @Bean
+    public ITemplateResolver templateResolver() {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setPrefix("/templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        templateResolver.setCacheable(true);
+        return templateResolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 }
