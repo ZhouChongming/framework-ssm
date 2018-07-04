@@ -13,24 +13,24 @@ import javax.servlet.Filter;
  */
 public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    @Override
-    protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{WebApplicationRootConfig.class};
-    }
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return new Class<?>[] { WebApplicationRootConfig.class };
+	}
 
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebMvcConfig.class};
-    }
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class<?>[] { WebMvcConfig.class };
+	}
 
-    @Override
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
-    }
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/" };
+	}
 
-    @Override
-    protected Filter[] getServletFilters() {
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8", true);
-        return new Filter[]{encodingFilter};
-    }
+	@Override
+	protected Filter[] getServletFilters() {
+		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8", true);
+		return new Filter[] { encodingFilter };
+	}
 }

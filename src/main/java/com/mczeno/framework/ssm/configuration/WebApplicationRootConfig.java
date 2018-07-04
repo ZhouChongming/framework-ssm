@@ -14,7 +14,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan(value = "com.mczeno.framework.ssm",
         excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = {EnableWebMvc.class})})
-@PropertySource("classpath:/application.properties")
+@PropertySources({
+        @PropertySource("classpath:application.properties"),
+        @PropertySource("classpath:db.properties")
+})
 public class WebApplicationRootConfig {
 
     @Bean

@@ -4,12 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.DefaultTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 /**
@@ -39,9 +38,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-//		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//		viewResolver.setPrefix("/pages/");
-//		viewResolver.setSuffix(".jsp");
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
 		registry.viewResolver(viewResolver);
@@ -49,7 +45,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Bean
     public TemplateEngine templateEngine() {
-        TemplateEngine templateEngine = new TemplateEngine();
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         return templateEngine;
     }
