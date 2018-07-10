@@ -1,4 +1,4 @@
-package com.mczeno.framework.ssm.configuration;
+package tech.mczeno.framework.ssm.configuration;
 
 import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @date 2018-06-29
  */
 @Configuration
-@ComponentScan(value = "com.mczeno.framework.ssm",
+@ComponentScan(value = "tech.mczeno.framework.ssm",
         excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = {EnableWebMvc.class})})
 @PropertySources({
         @PropertySource("classpath:application.properties"),

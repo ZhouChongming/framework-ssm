@@ -1,4 +1,4 @@
-package com.mczeno.framework.ssm.configuration;
+package tech.mczeno.framework.ssm.configuration;
 
 import javax.sql.DataSource;
 
@@ -12,8 +12,14 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * 数据源和 Mybatis 配置
+ *
+ * @author Chongming Zhou
+ * @date 2018-06-29
+ */
 @Configuration
-@MapperScan(value = "com.mczeno.framework.ssm.mapper")
+@MapperScan(value = "tech.mczeno.framework.ssm.mapper")
 public class MybatisConfig {
 	
 	@Value("${datasource.driver}")
@@ -43,7 +49,7 @@ public class MybatisConfig {
     @Value("${datasource.maximumPoolSize}")
     private int maximumPoolSize;
 
-	@Bean
+	@Bean("dataSource")
 	public DataSource dataSource() {
 		HikariDataSource dataSource = new HikariDataSource();
 		dataSource.setDriverClassName(driverClassName);
@@ -58,16 +64,16 @@ public class MybatisConfig {
 		return dataSource;
 	}
 	
-	@Bean
+	@Bean("sqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource());
-//		sqlSessionFactoryBean.settype
+		sqlSessionFactoryBean.setTypeAliasesPackage("tech.mczeno.framework.ssm.entity");
 		return sqlSessionFactoryBean.getObject();
 	}
 	
-	@Bean
-	public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
+	@Bean("dataSourceTransactionManager")
+	public DataSourceTransactionManager dataSourceTransactionManager() {
+		return new DataSourceTransactionManager(dataSource());
 	}
 }

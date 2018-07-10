@@ -1,7 +1,9 @@
-package com.mczeno.framework.ssm.configuration;
+package tech.mczeno.framework.ssm;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import tech.mczeno.framework.ssm.configuration.WebApplicationRootConfig;
+import tech.mczeno.framework.ssm.configuration.WebMvcConfig;
 
 import javax.servlet.Filter;
 
